@@ -1,5 +1,5 @@
 HOST = null; // localhost
-PORT = 8001;
+PORT = 8080;
 
 // when the daemon started
 var starttime = (new Date()).getTime();
@@ -82,7 +82,6 @@ var sessions = {};
 function createSession (nick) {
   if (nick.length > 50) return null;
   if (/[^\w_\-^!]/.exec(nick)) return null;
-
   for (var i in sessions) {
     var session = sessions[i];
     if (session && session.nick === nick) return null;
@@ -146,6 +145,8 @@ fu.get("/join", function (req, res) {
     res.simpleJSON(400, {error: "Bad nick."});
     return;
   }
+  var ss = 
+  console.log('sessions',JSON.stringify(sessions))
   var session = createSession(nick);
   if (session == null) {
     res.simpleJSON(400, {error: "Nick in use"});
